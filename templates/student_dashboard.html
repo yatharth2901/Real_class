@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Classroom UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f0f0f] text-white min-h-screen">
+
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-6 py-4 border-b border-[#1f1f1f] bg-[#0f0f0f]">
+    <div class="flex items-center space-x-4">
+      <span class="text-xl font-bold">Aceternity UI</span>
+      <nav class="hidden md:flex items-center space-x-6 text-sm text-gray-400">
+        <a href="#" class="hover:text-white transition-all">Components</a>
+        <a href="#" class="hover:text-white transition-all">Templates <span class="bg-green-600 text-white text-xs px-1 rounded">new</span></a>
+        <a href="#" class="hover:text-white transition-all">Pricing</a>
+        <a href="#" class="hover:text-white transition-all">Showcase</a>
+        <a href="#" class="hover:text-white transition-all">Playground</a>
+      </nav>
+    </div>
+    <div class="flex items-center space-x-4 text-sm text-gray-400">
+      <a href="#" class="hover:text-white transition-all">Discord</a>
+      <a href="#" class="hover:text-white transition-all">Twitter</a>
+      <button class="bg-[#131313] px-4 py-2 rounded-full text-sm text-white flex items-center border border-gray-700">
+        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        Search Components
+        <kbd class="ml-2 text-xs bg-gray-700 px-1 rounded">⌘ K</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="px-6 py-10">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold">Classrooms</h2>
+      <button onclick="toggleModal()" class="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-all duration-200">Add Classroom</button>
+    </div>
+
+    <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      
+      <!-- Cards will be appended here -->
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-[#131313] p-6 rounded-xl w-full max-w-sm shadow-lg">
+      <h2 class="text-lg font-semibold mb-4">Enter Code</h2>
+      <input type="text" id="classCodeInput" placeholder="Enter Code" class="w-full p-2 rounded bg-[#1e1e1e] text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-white mb-4" />
+      <div class="flex justify-end space-x-2">
+        <button onclick="toggleModal()" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white">Cancel</button>
+        <button onclick="addClassroom()" class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let classroomCount = 1;
+
+    function toggleModal() {
+      document.getElementById('modal').classList.toggle('hidden');
+    }
+
+    function addClassroom() {
+      const code = document.getElementById("classCodeInput").value.trim();
+      if (!code) return;
+
+      const container = document.getElementById("cardContainer");
+
+      const card = document.createElement("div");
+      card.className = "bg-[#131313] p-6 rounded-xl transition-all duration-300 border border-transparent hover:bg-white hover:text-black hover:border-white";
+      card.innerHTML = `
+        <h2 class="font-bold text-lg mb-2">Classroom ${classroomCount++}</h2>
+        <p class="text-sm">Code: ${code}</p>
+      `;
+
+        // Add click event to redirect
+        card.addEventListener("click", () => {
+          // Redirect to a link - you can customize the link as needed
+          window.location.href = `/CC/student_book/student_dashboard/class_room_student`; //'/${code}'
+        });
+      container.appendChild(card);
+      
+      document.getElementById("classCodeInput").value = "";
+      toggleModal();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aceternity Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #000;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+  <div class="bg-black rounded-xl border border-white/10 shadow-lg p-8 w-full max-w-md text-white space-y-4">
+    <h1 class="text-2xl font-bold">Welcome to Aceternity</h1>
+    <p class="text-white/70 text-sm">Login to aceternity if you can because we don’t have a login flow yet</p>
+
+    <div class="flex space-x-2">
+      <div class="flex-1">
+        <label class="text-sm font-semibold">First name</label>
+        <input type="text" placeholder="Tyler" class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white" />
+      </div>
+      <div class="flex-1">
+        <label class="text-sm font-semibold">Last name</label>
+        <input type="text" placeholder="Durden" class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white" />
+      </div>
+    </div>
+
+    <div>
+      <label class="text-sm font-semibold">Email Address</label>
+      <input type="email" placeholder="projectmayhem@fc.com" class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white" />
+    </div>
+
+    <div>
+      <label class="text-sm font-semibold">Password</label>
+      <input type="password" class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white" />
+    </div>
+
+    <div>
+      <label class="text-sm font-semibold">Gender</label>
+      <select class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Prefer not to say</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="text-sm font-semibold">Your twitter password</label>
+      <input type="password" class="mt-1 w-full p-2 rounded-md bg-neutral-800 text-white" />
+    </div>
+
+    <button onclick="window.location.href='/CC/teacher_book/teacher_dashboard'" class="w-full bg-neutral-800 hover:bg-neutral-700 p-3 rounded-md font-semibold">Sign up →</button>
+
+    <p class="text-center text-sm text-white/60">
+      Have an account?
+      <a href="/CC/login" class="text-blue-400 underline">Login</a>
+    </p>
+
+    <div class="space-y-2">
+      <button class="w-full bg-neutral-800 hover:bg-neutral-700 p-2 rounded-md flex items-center justify-center gap-2">
+        <span>🔗</span> GitHub
+      </button>
+      <button class="w-full bg-neutral-800 hover:bg-neutral-700 p-2 rounded-md flex items-center justify-center gap-2">
+        <span>🔍</span> Google
+      </button>
+      <button class="w-full bg-neutral-800 hover:bg-neutral-700 p-2 rounded-md flex items-center justify-center gap-2">
+        <span>💎</span> OnlyFans
+      </button>
+    </div>
+  </div>
+</body>
+</html>

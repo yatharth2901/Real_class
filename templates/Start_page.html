@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Background 2.0</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Aurora animations */
+        @keyframes aurora-movement {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .aurora-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .aurora-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                45deg,
+                #3b82f655,
+                #a5b4fc55,
+                #93c5fd55,
+                #ddd6fe55,
+                #60a5fa55
+            );
+            animation: aurora-movement 20s linear infinite;
+            background-size: 400% 400%;
+            filter: blur(80px);
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        .particle-layer {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, #ffffff08 2%, transparent 5%),
+                radial-gradient(circle at 80% 20%, #ffffff08 2%, transparent 5%);
+            background-size: 50px 50px;
+            animation: particle-float 40s linear infinite;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            background: #ffffff08;
+            border-radius: 16px;
+            border: 1px solid #ffffff15;
+        }
+
+        button {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px #3b82f633;
+        }
+
+        /* Dark/light mode transitions */
+        .dark .aurora-container {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+        }
+
+        :not(.dark) .aurora-container {
+            background: linear-gradient(45deg, #f0f4ff, #ffffff);
+            color: #1e293b;
+        }
+
+        :not(.dark) .aurora-overlay {
+            background: linear-gradient(
+                45deg,
+                #3b82f633,
+                #a5b4fc33,
+                #93c5fd33,
+                #ddd6fe33,
+                #60a5fa33
+            );
+            mix-blend-mode: multiply;
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora-container">
+        <div class="aurora-overlay"></div>
+        <div class="particle-layer"></div>
+        <div class="content">
+            <h1>Next-Level Auroraaaaaaaaaaaaaaaaa</h1>
+            <p>Dynamic background with particle effects</p>
+            <button id="themeToggle" onclick="window.location.href='/CC'">Toggle Theme </button >
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+
+            // Theme toggle
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            });
+
+            // Set initial theme
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            html.classList.toggle('dark', savedTheme === 'dark');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Classroom Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      background-color: #1e1e1e;
+      width: 250px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0.5rem 0;
+    }
+
+    .dashboard {
+      flex: 1;
+      padding: 2rem;
+      background-color: #181818;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-box {
+      background: #333;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .announcements-box {
+      background: #2c2c2c;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .announcement-post {
+      background: #444;
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+    }
+
+    .code-box {
+      background: #2c2c2c;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      background: #222;
+      border: 1px solid #555;
+      border-radius: 6px;
+      color: #fff;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #3b82f6;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Classroom</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <div class="dashboard">
+    <!-- Classroom Name -->
+    <div class="header-box">Classroom: Physics 101</div>
+
+    <!-- Class Code -->
+    <div class="code-box">
+      Class Code: <span id="classCode"></span>
+    </div>
+
+    <!-- Announcements -->
+    <div class="announcements-box">
+      <strong>Announcements</strong>
+      <div id="announcementsList"></div>
+      <textarea id="announcementInput" placeholder="Type your announcement..."></textarea>
+      <button onclick="postAnnouncement()">Post Announcement</button>
+    </div>
+  </div>
+
+  <script>
+    // Generate class code once
+    function generateRandomCode() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('classCode').textContent = code;
+    }
+    generateRandomCode();
+
+    function postAnnouncement() {
+      const input = document.getElementById('announcementInput');
+      const text = input.value.trim();
+      if (text !== '') {
+        const list = document.getElementById('announcementsList');
+        const newPost = document.createElement('div');
+        newPost.className = 'announcement-post';
+        newPost.textContent = text;
+        list.appendChild(newPost);
+        input.value = '';
+      }
+    }
+  </script>
+
+</body>
+</html>

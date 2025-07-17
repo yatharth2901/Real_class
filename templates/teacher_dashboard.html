@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classroom Cards</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen p-10">
+
+  <div class="max-w-2xl mx-auto space-y-4" id="classroom-container">
+    <!-- Classroom cards will be inserted here -->
+  </div>
+
+  <div class="max-w-2xl mx-auto mt-6">
+    <button onclick="openModal()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl">
+      + Add Classroom
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center hidden z-50">
+    <div class="bg-neutral-900 rounded-xl p-6 w-80 space-y-4">
+      <h2 class="text-lg font-bold text-white">New Classroom</h2>
+      <input type="text" id="className" placeholder="Classroom Name"
+        class="w-full px-4 py-2 rounded bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none" />
+      <input type="password" id="classPassword" placeholder="Password"
+        class="w-full px-4 py-2 rounded bg-neutral-800 text-white placeholder:text-neutral-400 focus:outline-none" />
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal()"
+          class="px-4 py-2 bg-neutral-700 text-white rounded hover:bg-neutral-600">Cancel</button>
+        <button onclick="submitClassroom()"
+          class="px-4 py-2 bg-green-600 text-white font-bold rounded hover:bg-green-700">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+      document.getElementById("className").value = '';
+      document.getElementById("classPassword").value = '';
+    }
+
+    function generateClassCode(length = 6) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    function submitClassroom() {
+      const name = document.getElementById("className").value.trim();
+      const password = document.getElementById("classPassword").value.trim();
+      if (!name || !password) {
+        alert("Please enter both name and password.");
+        return;
+      }
+
+      const code = generateClassCode();
+
+      const classroomHTML = `
+        <div class="flex justify-between items-center bg-neutral-900 hover:bg-neutral-800 rounded-xl p-4">
+          <div class="flex items-center gap-4">
+            <div class="h-14 w-14 rounded-lg bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500"></div>
+            <div>
+              <h3 class="text-white font-semibold">${name}</h3>
+              <p class="text-neutral-400 text-sm">Code: ${code}</p>
+              <p class="text-neutral-500 text-xs">Password: ${password}</p>
+            </div>
+          </div>
+          <button onclick="window.location.href='/CC/teacher_book/teacher_dashboard/classroom_view'"class="bg-gray-100 text-black hover:bg-green-500 hover:text-white text-sm px-4 py-2 rounded-full">View</button>
+        </div>
+      `;
+
+      document.getElementById("classroom-container").insertAdjacentHTML("beforeend", classroomHTML);
+      closeModal();
+    }
+  </script>
+</body>
+</html>
